@@ -13,9 +13,15 @@
     </div>
     <div class="mt-3 row justify-content-start">
         <div class="col-10">
+        @auth('web')
             <a href="#" class="mt-3 w-100">
-                <span class="text-success"><i class="fa fa-clinic-medical"></i></span>&emsp; 
-                Hospitals 
+                <span class="text-success"><i class="fa fa-user-tie"></i></span>&emsp; 
+                Staff 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="#" class="mt-2">
+                <span class="text-success"><i class="fa fa-archive"></i></span>&emsp; 
+                Medical Inventory 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="#" class="mt-2">
@@ -24,15 +30,11 @@
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="#" class="mt-2">
-                <span class="text-success"><i class="fa fa-chart-line"></i></span>&emsp; 
-                Statistics 
-                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
-            </a>
-            <a href="#" class="mt-2">
                 <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
                 Settings 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
+        @endauth
         </div>
     </div>
     <img src="{{asset('img/sidebar_footer.png')}}" class="img img-fluid" width="60%"  style="position: absolute; bottom: 2%; left: 15%">

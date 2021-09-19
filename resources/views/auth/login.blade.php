@@ -5,7 +5,15 @@
     <div class="row justify-content-center">
         <span class="form-header">USER LOGIN</span>
     </div>
-    <br><br>
+    <br>
+    @error('email')
+        <div class="row justify-content-center">
+            <div class="col-10 bg-danger px-4 py-2">
+                <span class="text-light">{{ $message }}</span>
+            </div>
+        </div>
+    @enderror
+    <br>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
