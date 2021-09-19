@@ -2,26 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Doctor extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = 'hospital_root_users';
+    protected $table = 'doctors';
 
     protected $fillable = [
         'hospital_id',
-        'fullname',
+        'doctor_card_number',
+        'firstname',
+        'lastname',
+        'othernames',
+        'gender',
+        'age',
         'email',
         'phone_number',
         'password',
         'profile_pic',
+        'region',
+        'district',
+        'town',
+        'landmark',
+        'residential_address',
+        'on_duty',
     ];
 
     public function hospital()

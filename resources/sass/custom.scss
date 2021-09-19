@@ -1,0 +1,114 @@
+body{
+    background-color: #F6F9FB;
+}
+.card{
+    padding: 100px 50px;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.16);
+}
+.gh-service-row{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.form-header{
+    font-size: large;
+    font-weight: 800;
+    color: #008A20;   
+}
+.login-input{
+    background-color: #008A20;
+    border-radius: 25px;
+    padding: 5px 10px;
+}
+.input-green{
+    background-color: #008A20;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+}
+.input-green:focus{
+    background-color: #008A20;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+}
+.input-green::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: whitesmoke;
+    font-size: medium;
+    opacity: 1; /* Firefox */
+}
+
+/* The sidebar menu */
+.sidenav {
+    height: 100vh; /* Full-height: remove this if you want "auto" height */
+    width: 300px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: white; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+
+    /* The navigation menu links */
+    a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+        color: #818181;
+        display: block;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    a:hover {
+        color: #008A20;
+    }
+}
+  
+  
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+} 
+
+#topbar .dropdown-toggle::after {
+    display: none;
+}
+
+.dashboard-options{
+    background-color: white;
+    height: 120px;
+    border: 0.1px solid #96d6a5;
+    border-radius: 18px;
+    
+    .icon{
+        background-color: #008A20;
+        color: whitesmoke;
+        height: 50px;
+        width: 50px;
+        border-radius: 15px;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    .option-text{
+        color: #939694;
+    }
+}
+.dashboard-options:hover{
+    background-color: #008A20;
+
+    .icon{
+        background-color: whitesmoke;
+        color: #008A20;
+    }
+
+    .option-text{
+        color: whitesmoke;
+    }
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
