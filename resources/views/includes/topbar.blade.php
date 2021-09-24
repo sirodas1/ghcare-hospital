@@ -45,7 +45,7 @@
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ ($guard == "Doctor Portal") ? route('doctor.logout') : (($guard == "Nurse Portal") ? route('nurse.logout') : route('logout')) }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ ($guard == "Doctor Portal") ? route('doctor.logout') : (($guard == "Nurse Portal") ? route('nurse.logout') : (($guard == "Pharmacist Portal") ? route('pharmacist.logout') : route('logout'))) }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

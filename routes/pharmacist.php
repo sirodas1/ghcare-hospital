@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -23,6 +24,7 @@ Route::group(['middleware' => 'auth:pharmacist', 'as' => 'pharmacist.', 'prefix'
     Route::get('home', [DashboardController::class, 'home'])->name('home'); 
     Route::post('change-password', [DashboardController::class, 'changePassword'])->name('change-password');
     Route::post('/logout',function(){
+        Auth::user()->update(['on_duty' => 0]);
         Auth::guard('pharmacist')->logout();
         return redirect()->action([
             LoginController::class,

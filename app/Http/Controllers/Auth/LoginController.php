@@ -35,20 +35,21 @@ class LoginController extends Controller
             // $user = Doctor::where('email', $credentials['email']);
             if (Auth::guard('doctor')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
-                Log::info('Authentication Attempt was Successful');
-    
+                Log::info('Authentication Attempt for Doctor was Successful');
+                Auth::guard('doctor')->user()->update(['on_duty' => true]);
                 return redirect()->intended(RouteServiceProvider::DOCTOR);
             }
         }else if($credentials['user_type'] == 'Pharmacist'){
             if (Auth::guard('pharmacist')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
-    
-                return redirect()->intended('home');
+                Log::info('Authentication Attempt for Pharmacist was Successful');
+                Auth::guard('pharmacist')->user()->update(['on_duty' => true]);
+                return redirect()->intended(RouteServiceProvider::PHARMACIST);
             }
         }else{
             if (Auth::guard('nurse')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
-                Log::info('Authentication Attempt was Successful');
+                Log::info('Authentication Attempt for Nurse was Successful');
                 Auth::guard('nurse')->user()->update(['on_duty' => true]);
                 return redirect()->intended(RouteServiceProvider::NURSE);
             }

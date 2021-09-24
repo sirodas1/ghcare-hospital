@@ -16,6 +16,11 @@ class DashboardController extends Controller
         return view('nurse_dashboard.home');
     }
 
+    public function doctorHome()
+    {
+        return view('doctor_dashboard.home');
+    }
+
     public function changePassword(Request $request)
     {
         $this->validate($request, [

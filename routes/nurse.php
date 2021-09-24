@@ -35,7 +35,6 @@ Route::group(['middleware' => 'auth:nurse', 'as' => 'nurse.', 'prefix' => 'nurse
     Route::group(['prefix' => 'patient', 'as' => 'patient.'], function () {
         Route::get('', [PatientsController::class, 'nurseAccessPatient'])->name('home');
         Route::post('add-allergy', [PatientsController::class, 'addAllergyOrPhobia'])->name('add-allergy');
-        Route::post('add', [PatientsController::class, 'addPatient'])->name('add');
         Route::get('folders/{id}', [PatientsController::class, 'openFolders'])->name('folders');
         Route::get('folder/{id}', [PatientsController::class, 'openFolder'])->name('folder');
         Route::get('folder/{id}/file', [PatientsController::class, 'nurseCreateFile'])->name('file');

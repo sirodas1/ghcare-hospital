@@ -167,4 +167,63 @@ class SettingsController extends Controller
 
         return redirect()->back();
     }
+
+    public function doctorHome()
+    {
+        $doctor = Auth::guard('doctor')->user();
+        $data = [
+            'doctor' => $doctor,
+        ];
+        return view('doctor_dashboard.settings.home', $data);
+    }
+
+    public function updateDoctor()
+    {
+        $validator = Validator::make(request()->all() ,[
+            'profile_pic' => 'nullable|image',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'othernames' => 'nullable|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|phone:GH',
+            'doctor_card_number' => 'required|string',
+            'gender' => 'required|string',
+            'age' => 'required|numeric',
+            'region' => 'required|string',
+            'district' => 'required|string',
+            'town' => 'required|string',
+            'landmark' => 'required|string',
+            'residential_address' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            Log::error($validator->errors());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $doctor = Auth::user();
+            $doctor->update(request()->except('profile_pic'));
+            
+            if(request()->profile_pic){
+                $image = request()->file('profile_pic');
+                $name = $doctor->id . '_profile_pic' . '.' .
+                $image->getClientOriginalExtension();
+                $folder = '/uploads/doctor/';
+                $filePath = $this->uploadOne($image, $folder, $name);
+                $doctor->profile_pic = $filePath;
+                $doctor->save();
+            }
+            
+            DB::commit();
+            session()->flash('success_message', 'Account Information Was Successfully Updated.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            DB::rollback();
+            session()->flash('error_message', 'Account Information Was Not Successfully Updated .');
+        }
+
+        return redirect()->back();
+    }
 }

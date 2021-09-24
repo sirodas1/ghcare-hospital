@@ -70,6 +70,18 @@
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
         @endauth
+        @auth('doctor')
+            <a href="{{route('doctor.patient.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-user-injured"></i></span>&emsp; 
+                Patients 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="{{route('doctor.settings.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
+                Settings 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+        @endauth
         </div>
     </div>
     <img src="{{asset('img/sidebar_footer.png')}}" class="img img-fluid" width="60%"  style="position: absolute; bottom: 2%; left: 15%">
