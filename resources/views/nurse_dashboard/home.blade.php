@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div onclick="window.location.href = '{{route('settings.home')}}'" class="dashboard-options cursor-pointer w-full py-4 px-4">
+            <div onclick="window.location.href = '{{route('nurse.settings.home')}}'" class="dashboard-options cursor-pointer w-full py-4 px-4">
                 <div class="row justify-content-between mx-1">
                     <div class="icon d-flex justify-content-center">
                         <i class="fa fa-sliders-h"></i>
