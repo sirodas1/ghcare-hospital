@@ -11,7 +11,10 @@ class DashboardController extends Controller
         return view('dashboard.home');
     }
 
-
+    public function nurseHome()
+    {
+        return view('nurse_dashboard.home');
+    }
 
     public function changePassword(Request $request)
     {

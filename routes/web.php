@@ -69,7 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('', [PatientsController::class, 'home'])->name('home');
         Route::post('add', [PatientsController::class, 'addPatient'])->name('add');
         Route::get('access', [PatientsController::class, 'accessPatient'])->name('access');
-        Route::get('folder/{id}', [PatientsController::class, 'openFolders'])->name('folder');
+        Route::get('folders/{id}', [PatientsController::class, 'openFolders'])->name('folders');
+        Route::get('folder/{id}', [PatientsController::class, 'openFolder'])->name('folder');
     });
     //Settings
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {

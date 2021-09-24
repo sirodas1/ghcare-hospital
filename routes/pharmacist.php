@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::group(['middleware' => 'auth:doctor', 'as' => 'doctor.', 'prefix' => 'doctor'], function () {
+Route::group(['middleware' => 'auth:pharmacist', 'as' => 'pharmacist.', 'prefix' => 'pharmacist'], function () {
     Route::get('home', [DashboardController::class, 'home'])->name('home'); 
     Route::post('change-password', [DashboardController::class, 'changePassword'])->name('change-password');
     Route::post('/logout',function(){
-        Auth::guard('doctor')->logout();
+        Auth::guard('pharmacist')->logout();
         return redirect()->action([
             LoginController::class,
             'login'

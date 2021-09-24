@@ -21,6 +21,10 @@ class RouteServiceProvider extends ServiceProvider
 
     public const DOCTOR = '/doctor/home';
 
+    public const NURSE = '/nurse/home';
+
+    public const PHARMACIST = '/pharmacist/home';
+
     /**
      * The controller namespace for the application.
      *
@@ -53,6 +57,14 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/doctor.php'));
+
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/nurse.php'));
+
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/pharmacist.php'));
         });
     }
 

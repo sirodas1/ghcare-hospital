@@ -36,7 +36,7 @@
                     <a id="navbarDropdown" href="#" class="btn btn-light bg-white btn-lg py-1 px-2 dropdown-toggle text-success" style="border-radius: 40%" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i></a>
 
                     <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="navbarDropdown">
-                        <span class="dropdown-item">{{auth()->user()->fullname}}</span>
+                        <span class="dropdown-item">{{auth()->user()->fullname ?? (auth()->user()->lastname.' '.auth()->user()->firstname)}}</span>
                         <hr>
                         <a href="#" class="dropdown-item" data-toggle="modal" data-target="#changepassword">Change Password</a>
                         <a class="dropdown-item" href="#"
@@ -45,7 +45,7 @@
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ ($guard == "Doctor Portal") ? route('doctor.logout') : route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ ($guard == "Doctor Portal") ? route('doctor.logout') : (($guard == "Nurse Portal") ? route('nurse.logout') : route('logout')) }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

@@ -4,11 +4,34 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-9">
-            <button class="btn btn-success py-2 px-2 w-100" style="border-radius: 12px" onclick="window.location.href = '{{route('home')}}';">
-                <img src="{{asset('img/menu.png')}}" class="img img-fluid" width="12%">&emsp; 
-                <span style="font-size: 1.1rem; font-weight: Bold">Dashboard</span>&emsp;&emsp;&emsp;
-                <i class="fa fa-arrow-right"></i>
-            </button>
+            @auth('web')
+                <button class="btn btn-success py-2 px-2 w-100" style="border-radius: 12px" onclick="window.location.href = '{{route('home')}}';">
+                    <img src="{{asset('img/menu.png')}}" class="img img-fluid" width="12%">&emsp; 
+                    <span style="font-size: 1.1rem; font-weight: Bold">Dashboard</span>&emsp;&emsp;&emsp;
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            @endauth
+            @auth('nurse')
+                <button class="btn btn-success py-2 px-2 w-100" style="border-radius: 12px" onclick="window.location.href = '{{route('nurse.home')}}';">
+                    <img src="{{asset('img/menu.png')}}" class="img img-fluid" width="12%">&emsp; 
+                    <span style="font-size: 1.1rem; font-weight: Bold">Dashboard</span>&emsp;&emsp;&emsp;
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            @endauth
+            @auth('doctor')
+                <button class="btn btn-success py-2 px-2 w-100" style="border-radius: 12px" onclick="window.location.href = '{{route('doctor.home')}}';">
+                    <img src="{{asset('img/menu.png')}}" class="img img-fluid" width="12%">&emsp; 
+                    <span style="font-size: 1.1rem; font-weight: Bold">Dashboard</span>&emsp;&emsp;&emsp;
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            @endauth
+            @auth('pharmacist')
+                <button class="btn btn-success py-2 px-2 w-100" style="border-radius: 12px" onclick="window.location.href = '{{route('pharmacist.home')}}';">
+                    <img src="{{asset('img/menu.png')}}" class="img img-fluid" width="12%">&emsp; 
+                    <span style="font-size: 1.1rem; font-weight: Bold">Dashboard</span>&emsp;&emsp;&emsp;
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            @endauth
         </div>
     </div>
     <div class="mt-3 row justify-content-start">
@@ -30,6 +53,18 @@
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
             <a href="{{route('settings.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
+                Settings 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+        @endauth
+        @auth('nurse')
+            <a href="{{route('nurse.patient.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-user-injured"></i></span>&emsp; 
+                Patients 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="{{route('nurse.settings.home')}}" class="mt-2">
                 <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
                 Settings 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>

@@ -5,28 +5,12 @@
 @section('back-check', true)
 
 @section('content')
-  @if (isset($patients) && $patients->isNotEmpty())
-    <div class="row justify-content-between mt-5">
-      <div class="col-md-7">
-        <form action="{{route('patient.home')}}" method="GET">
-          <div class="form-row">
-            <input type="text" name="searchKey" id="searchKey" value="{{old('searchKey') ?? $searchKey}}" class="form-control w-75" placeholder="Search for Drug by Name;">
-            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-          </div>
-        </form>
-      </div>
-      <div class="col-md-3">
-        <a href="#" class="btn btn-success"data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;New Patient</a>
-      </div>
-    </div>
-  @else
-    <div class="row justify-content-end mt-5">
-      <div class="col-md-3">
-        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;New Patient</a>
-      </div>
-    </div>
-  @endif
   
+  <div class="row justify-content-end mt-5">
+    <div class="col-md-3">
+      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;New Patient</a>
+    </div>
+  </div>
   @if (session()->has('search_message'))
     <br>
     <div class="row justify-content-center">
@@ -43,7 +27,7 @@
       </div>
     </div><br><br>
   @endif
-  @if (isset($patients) && $patients->isNotEmpty())
+  @if (isset($folders) && $folders->isNotEmpty())
     <div class="row p-2 my-3">
       <div class="table-responsive">
         <table class="table table-hover">
@@ -56,14 +40,14 @@
             <th scope="col"></th>
           </thead>
           <tbody class="my-2">
-            @foreach ($patients as $patient)
+            @foreach ($folders as $folder)
               <tr class="cursor-pointer my-1">
-                <td>{{$patient->name}}</td>
-                <td>{{$patient->age}}</td>
-                <td>{{$patient->email}}</td>
-                <td>{{$patient->phone_number}}</td>
-                <td>{{$patient->town}}</td>
-                <td><a href="#" class="btn btn-success btn-sm">Open Folder</a></td>
+                <td>{{$folder->patient->lastname.' '.$folder->patient->firstname}}</td>
+                <td>{{$folder->patient->age}}</td>
+                <td>{{$folder->patient->email}}</td>
+                <td>{{$folder->patient->phone_number}}</td>
+                <td>{{$folder->patient->town}}</td>
+                <td><a href="{{route('patient.access', ['national_card_id' => $folder->patient->national_card_id])}}" class="btn btn-success btn-sm"><i class="fa fa-folder-open"></i>&emsp; Open Folder</a></td>
               </tr>
             @endforeach
           </tbody>

@@ -49,8 +49,8 @@ class LoginController extends Controller
             if (Auth::guard('nurse')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
                 Log::info('Authentication Attempt was Successful');
-
-                return redirect()->intended('home');
+                Auth::guard('nurse')->user()->update(['on_duty' => true]);
+                return redirect()->intended(RouteServiceProvider::NURSE);
             }
         }
 

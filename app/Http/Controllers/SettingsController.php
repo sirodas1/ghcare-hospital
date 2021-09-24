@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use Log;
+use Validator;
 
 class SettingsController extends Controller
 {
@@ -101,6 +102,68 @@ class SettingsController extends Controller
         }
 
         session()->flash('success_message', 'Account Information Was Successfully Updated');
+
+        return redirect()->back();
+    }
+
+    public function nurseHome()
+    {
+        $nurse = Auth::guard('nurse')->user();
+        $data = [
+            'nurse' => $nurse,
+        ];
+        return view('nurse_dashboard.settings.home', $data);
+    }
+
+    public function updateNurse()
+    {
+        $validator = Validator::make(request()->all() ,[
+            'profile_pic' => 'nullable|image',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'othernames' => 'nullable|string',
+            'email' => 'required|email',
+            'phone_number' => 'required|phone:GH',
+            'nursing_card_number' => 'required|string',
+            'gender' => 'required|string',
+            'age' => 'required|numeric',
+            'region' => 'required|string',
+            'district' => 'required|string',
+            'town' => 'required|string',
+            'landmark' => 'required|string',
+            'residential_address' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            Log::error($validator->errors());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $nurse = Auth::guard('nurse')->user();
+            $nurse->update(request()->except('profile_pic'));
+            
+            if(request()->profile_pic){
+                $image = request()->file('profile_pic');
+                $name = $nurse->id . '_profile_pic' . '.' .
+                $image->getClientOriginalExtension();
+                $folder = '/uploads/nurse/';
+                $filePath = $this->uploadOne($image, $folder, $name);
+                $nurse->profile_pic = $filePath;
+                $nurse->save();
+            }
+            
+            DB::commit();
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            DB::rollback();
+
+            session()->flash('error_message', 'Account Information Was Not Successfully Updated .');
+            return redirect()->back();
+        }
+
+        session()->flash('success_message', 'Account Information Was Successfully Updated.');
 
         return redirect()->back();
     }
