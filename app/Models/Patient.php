@@ -31,5 +31,14 @@ class Patient extends Model
         'nok_phone_number',
     ];
 
+    public function allergies()
+    {
+        return $this->hasMany(AllergyAndPhorbia::class, 'patient_id');
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class, 'patient_id');
+    }
 
 }

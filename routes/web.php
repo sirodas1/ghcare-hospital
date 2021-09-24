@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +62,24 @@ Route::group(['middleware' => 'auth'], function () {
     //Medical Inventory
     Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function () {
         Route::get('', [InventoryController::class, 'home'])->name('home');
+        Route::post('add', [InventoryController::class, 'addDrug'])->name('add');
+    });
+    //Patients Info
+    Route::group(['prefix' => 'patient', 'as' => 'patient.'], function () {
+        Route::get('', [PatientsController::class, 'home'])->name('home');
+        Route::post('add', [PatientsController::class, 'addPatient'])->name('add');
+        Route::get('access', [PatientsController::class, 'accessPatient'])->name('access');
+        Route::get('folder/{id}', [PatientsController::class, 'openFolders'])->name('folder');
+    });
+    //Settings
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+        Route::get('', [SettingsController::class, 'home'])->name('home');
+        Route::put('update-hospital', [SettingsController::class, 'updateHospital'])->name('update-hospital');
+        Route::put('update-root-user', [SettingsController::class, 'updateRootUser'])->name('update-root-user');
     });
 });
+
+// Route::group(['middleware' => 'auth:doctor', 'prefix' => 'doctor', 'as' => 'doctors.'], function () {
+//     Route::get('home', [DashboardController::class, 'home'])->name('home'); 
+//     Route::post('change-password', [DashboardController::class, 'changePassword'])->name('change-password');
+// });

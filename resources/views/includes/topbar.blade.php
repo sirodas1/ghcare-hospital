@@ -39,13 +39,13 @@
                         <span class="dropdown-item">{{auth()->user()->fullname}}</span>
                         <hr>
                         <a href="#" class="dropdown-item" data-toggle="modal" data-target="#changepassword">Change Password</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="#"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ ($guard == "Doctor Portal") ? route('doctor.logout') : route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

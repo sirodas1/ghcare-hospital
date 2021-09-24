@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
 use Auth;
 use Session;
+use Log;
 use App\Models\User;
 
 class LoginController extends Controller
@@ -30,10 +32,12 @@ class LoginController extends Controller
                 return redirect()->intended('home');
             }
         }else if($credentials['user_type'] == 'Doctor'){
+            // $user = Doctor::where('email', $credentials['email']);
             if (Auth::guard('doctor')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
+                Log::info('Authentication Attempt was Successful');
     
-                return redirect()->intended('home');
+                return redirect()->intended(RouteServiceProvider::DOCTOR);
             }
         }else if($credentials['user_type'] == 'Pharmacist'){
             if (Auth::guard('pharmacist')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
@@ -42,9 +46,10 @@ class LoginController extends Controller
                 return redirect()->intended('home');
             }
         }else{
-            if (Auth::guard('doctor')->attempt(['email' => $credentials['email'], 'password' => $credentials['nurse']])) {
+            if (Auth::guard('nurse')->attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
-    
+                Log::info('Authentication Attempt was Successful');
+
                 return redirect()->intended('home');
             }
         }

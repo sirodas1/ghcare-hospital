@@ -6,13 +6,13 @@
         <span class="form-header">USER LOGIN</span>
     </div>
     <br>
-    @error('email')
+    @if(session()->has('errors'))
         <div class="row justify-content-center">
             <div class="col-10 bg-danger px-4 py-2">
-                <span class="text-light">{{ $message }}</span>
+                <span class="text-light">{{ session('errors')->first('email'); }}</span>
             </div>
         </div>
-    @enderror
+    @endif
     <br>
     <form method="POST" action="{{ route('login') }}">
         @csrf

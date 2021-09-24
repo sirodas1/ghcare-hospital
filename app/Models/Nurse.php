@@ -35,4 +35,9 @@ class Nurse extends Model
     {
         return $this->belongsTo(Hospital::class, 'hospital_id');
     }
+
+    public function createdFiles()
+    {
+        return $this->hasMany(File::class, 'nurse_id');
+    }
 }

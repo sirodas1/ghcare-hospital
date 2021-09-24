@@ -28,7 +28,7 @@ class Hospital extends Model
 
     public function root_user()
     {
-        return $this->hasOne(HospitalRootUser::class, 'hospital_id');
+        return $this->hasOne(User::class, 'hospital_id');
     }
 
     public function doctors()
@@ -45,4 +45,15 @@ class Hospital extends Model
     {
         return $this->hasMany(Nurse::class, 'hospital_id');
     }
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class, 'hospital_id');
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class, 'hospital_id');
+    }
+    
 }

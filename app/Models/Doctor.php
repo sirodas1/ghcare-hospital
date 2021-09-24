@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Doctor extends Model
+class Doctor extends Authenticatable
 {
     use HasFactory;
     protected $primaryKey = 'id';
@@ -34,5 +35,10 @@ class Doctor extends Model
     public function hospital()
     {
         return $this->belongsTo(Hospital::class, 'hospital_id');
+    }
+
+    public function assignedFiles()
+    {
+        return $this->hasMany(File::class, 'doctore_id');
     }
 }

@@ -14,22 +14,22 @@
     <div class="mt-3 row justify-content-start">
         <div class="col-10">
         @auth('web')
-            <a href="#" class="mt-3 w-100">
+            <a href="{{route('staff.home')}}" class="mt-3 w-100">
                 <span class="text-success"><i class="fa fa-user-tie"></i></span>&emsp; 
                 Staff 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
-            <a href="#" class="mt-2">
+            <a href="{{route('inventory.home')}}" class="mt-2">
                 <span class="text-success"><i class="fa fa-archive"></i></span>&emsp; 
                 Medical Inventory 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
-            <a href="#" class="mt-2">
+            <a href="{{route('patient.home')}}" class="mt-2">
                 <span class="text-success"><i class="fa fa-user-injured"></i></span>&emsp; 
                 Patients 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
-            <a href="#" class="mt-2">
+            <a href="{{route('settings.home')}}" class="mt-2">
                 <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
                 Settings 
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
