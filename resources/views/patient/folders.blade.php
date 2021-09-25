@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Patients Folders')
-@section('page-back', (Auth::guard('nurse')->check()) ? route('nurse.patient.home',['national_card_id' => $patient->national_card_id]) : route('patient.home'))
+@section('page-back', (Auth::guard('nurse')->check()) ? route('nurse.patient.home',['national_card_id' => $patient->national_card_id]) : ((Auth::guard('doctor')->check()) ? route('doctor.patient.home')  : route('patient.home') ))
 @section('back-check', true)
 
 @section('content')
@@ -38,7 +38,7 @@
             @foreach ($folders as $folder)
               <tr class="cursor-pointer my-1">
                 <td>{{$folder->hospital->name}}</td>
-                <td><a href="{{(Auth::guard('nurse')->check()) ? route('nurse.patient.folder', ['id' => $folder->id]) : route('patient.folder', ['id' => $folder->id])}}" class="fa fa-folder-open"></a></td>
+                <td><a href="{{(Auth::guard('nurse')->check()) ? route('nurse.patient.folder', ['id' => $folder->id]) : ((Auth::guard('doctor')->check()) ? route('doctor.patient.folder', ['id' => $folder->id]) :  route('patient.folder', ['id' => $folder->id]) )}}" class="fa fa-folder-open"></a></td>
               </tr>
             @endforeach
           </tbody>
