@@ -32,6 +32,11 @@ class PatientsController extends Controller
             'national_card_id' => 'required',
         ]);
         $patient = Patient::where('national_card_id', $request->national_card_id)->first();
+        if (!$patient) {
+            session()->flash('error_message', 'Patient Doesn\'t exist.');
+            return back();
+        }
+        
         $folder = $patient->folders->where('hospital_id', auth()->user()->hospital->id)->first();
 
         $data =[
@@ -70,6 +75,11 @@ class PatientsController extends Controller
         ]);
 
         $patient = Patient::where('national_card_id', $request->national_card_id)->first();
+        if (!$patient) {
+            session()->flash('error_message', 'Patient Doesn\'t exist.');
+            return back();
+        }
+
         $folder = $patient->folders->where('hospital_id', auth()->user()->hospital->id)->first();
         
         $data =[
@@ -122,11 +132,6 @@ class PatientsController extends Controller
             session()->flash('error_message', 'Error Occured when Creating Folder for Patient.');
         }
         return back();
-    }
-
-    public function nurseOpensFolders($id)
-    {
-        
     }
 
     public function nurseCreateFile($id)

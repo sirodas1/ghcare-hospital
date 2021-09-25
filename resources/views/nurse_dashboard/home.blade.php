@@ -9,6 +9,14 @@
     <div class="row">
         <span class="text-secondary">A Health Interoperability For National Development</span>
     </div>
+    @if (session()->has('error_message'))
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-6 bg-danger px-4 py-2">
+            <span class="text-light">{{session()->get('error_message')}}</span>
+        </div>
+    </div>
+    @endif
     <div class="row justify-content-start my-5">
         <div class="col-md-4">
             <div class="dashboard-options cursor-pointer w-full py-4 px-4" data-toggle="modal" data-target="#searchPatientCardModal">
