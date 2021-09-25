@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth:pharmacist', 'as' => 'pharmacist.', 'prefix'
 
     //Medications
     Route::group(['prefix' => 'medication', 'as' => 'medication.'], function () {
-        Route::get('', [InventoryController::class, 'home'])->name('home');
-        Route::put('issue', [InventoryController::class, 'issueDrug'])->name('issue');
+        Route::get('', [InventoryController::class, 'medicationhome'])->name('home');
+        Route::get('issue/{id}', [InventoryController::class, 'issueDrug'])->name('issue');
     });
 
     //Medical Inventory

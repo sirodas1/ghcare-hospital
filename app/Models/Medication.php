@@ -14,6 +14,7 @@ class Medication extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'hospital_id',
         'file_id',
         'doctor_id',
         'pharmacist_id',
@@ -43,5 +44,10 @@ class Medication extends Model
     public function processedPharmacist()
     {
         return $this->belongsTo(Pharmacist::class, 'pharmacist_id');
+    }
+
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 }

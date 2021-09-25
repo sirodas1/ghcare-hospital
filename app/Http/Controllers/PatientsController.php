@@ -296,6 +296,7 @@ class PatientsController extends Controller
         DB::beginTransaction();
 
         try {
+            $request['hospital_id'] = Auth::user()->hospital->id;
             $medication = Medication::create($request->all());
             session()->flash('success_message', 'Prescription of Medication was Successful.');
             DB::commit();
