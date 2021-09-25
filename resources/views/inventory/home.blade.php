@@ -1,14 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Hospitals Inventory')
-@section('page-back', route('home'))
+@section('page-back', (Auth::guard('pharmacist')->check()) ? route('pharmacist.home') : route('home'))
 @section('back-check', true)
 
 @section('content')
   @if (isset($inventories) && $inventories->isNotEmpty())
     <div class="row justify-content-between mt-5">
       <div class="col-md-7">
-        <form action="{{route('inventory.home')}}" method="GET">
+        <form action="{{(Auth::guard('pharmacist')->check()) ? route('pharmacist.inventory.home') : route('inventory.home')}}" method="GET">
           <div class="form-row">
             <input type="text" name="searchKey" id="searchKey" value="{{old('searchKey') ?? $searchKey}}" class="form-control w-75" placeholder="Search for Drug by Name;">
             <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
@@ -92,7 +92,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-9">
-              <form method="POST" action="{{ route('inventory.add') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ (Auth::guard('pharmacist')->check()) ? route('pharmacist.inventory.add') : route('inventory.add') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-4">
                   <div class="col-6 col-md-3">
