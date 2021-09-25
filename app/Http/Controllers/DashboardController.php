@@ -21,6 +21,11 @@ class DashboardController extends Controller
         return view('doctor_dashboard.home');
     }
 
+    public function pharmacistHome()
+    {
+        return view('pharmacist_dashboard.home');
+    }
+
     public function changePassword(Request $request)
     {
         $this->validate($request, [

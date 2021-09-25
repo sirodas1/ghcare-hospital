@@ -82,6 +82,23 @@
                 <span class="float-right"><i class="fa fa-chevron-right"></i></span>
             </a>
         @endauth
+        @auth('pharmacist')
+            <a href="{{route('pharmacist.medication.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-tablets"></i></span>&emsp; 
+                Medication 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="{{route('pharmacist.inventory.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-archive"></i></span>&emsp; 
+                Inventory 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+            <a href="{{route('pharmacist.settings.home')}}" class="mt-2">
+                <span class="text-success"><i class="fa fa-sliders-h"></i></span>&emsp; 
+                Settings 
+                <span class="float-right"><i class="fa fa-chevron-right"></i></span>
+            </a>
+        @endauth
         </div>
     </div>
     <img src="{{asset('img/sidebar_footer.png')}}" class="img img-fluid" width="60%"  style="position: absolute; bottom: 2%; left: 15%">

@@ -83,7 +83,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-9">
-                    <form method="post" action="{{ route('change-password') }}">
+                    <form id="changePasswordForm" method="post" action="{{ route('change-password') }}">
                         @csrf
                 
                         <div class="form-group my-4">
@@ -107,7 +107,7 @@
                         </div>
                         <div class="form-group mb-5 row justify-content-center">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-danger w-100" style="border-radius: 25px;">
+                                <button form="changePasswordForm" type="submit" class="btn btn-danger w-100" style="border-radius: 25px;">
                                     {{ __('Update Password') }}
                                 </button>
                             </div>

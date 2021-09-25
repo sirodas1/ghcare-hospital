@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::group(['middleware' => 'auth:pharmacist', 'as' => 'pharmacist.', 'prefix' => 'pharmacist'], function () {
-    Route::get('home', [DashboardController::class, 'home'])->name('home'); 
+    Route::get('home', [DashboardController::class, 'pharmacistHome'])->name('home'); 
     Route::post('change-password', [DashboardController::class, 'changePassword'])->name('change-password');
     Route::post('/logout',function(){
         Auth::user()->update(['on_duty' => 0]);
@@ -31,4 +31,22 @@ Route::group(['middleware' => 'auth:pharmacist', 'as' => 'pharmacist.', 'prefix'
             'login'
         ]);
     })->name('logout');
+
+    //Medications
+    Route::group(['prefix' => 'medication', 'as' => 'medication.'], function () {
+        Route::get('', [InventoryController::class, 'home'])->name('home');
+        Route::put('issue', [InventoryController::class, 'issueDrug'])->name('issue');
+    });
+
+    //Medical Inventory
+    Route::group(['prefix' => 'inventory', 'as' => 'inventory.'], function () {
+        Route::get('', [InventoryController::class, 'home'])->name('home');
+        Route::post('add', [InventoryController::class, 'addDrug'])->name('add');
+    });
+
+    //Settings
+    Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
+        Route::get('', [SettingsController::class, 'pharmacistHome'])->name('home');
+        Route::put('update', [SettingsController::class, 'updatePharmacist'])->name('update');
+    });
 });
