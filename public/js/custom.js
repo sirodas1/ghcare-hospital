@@ -30,3 +30,10 @@ window.loadImagePreview = function (id, input) {
         div.style.display = 'none';
     }
 };
+
+function addHash(elem) {
+    var val = elem.value;
+    if(!val.match(/^GHA-/)) {
+        elem.value = "GHA-" + val;
+    }
+}

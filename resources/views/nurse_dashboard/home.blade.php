@@ -67,7 +67,7 @@
                         <img src="/img/id-card@2x.png" class="img img-fluid form-icons" width="50px">
                       </div>
                       <div class="col-11 pt-1 px-0">
-                        <input id="national_card_id" type="text" class="form-control input-green" name="national_card_id" required placeholder="Enter Ghana National Card ID">
+                        <input id="national_card_id" type="text" class="form-control input-green" name="national_card_id" required placeholder="Enter Ghana National Card ID" onclick="addHash(this)" pattern="GHA-[0-9]{9}-[0-9]" title="must be in this format GHA-XXXXXXXXX-X" >
                       </div>
                     </div>
                   </div>

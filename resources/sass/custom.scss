@@ -112,3 +112,7 @@ body{
 .cursor-pointer{
     cursor: pointer;
 }
+
+#national_card_id:invalid{
+    border: red solid 3px;
+}
