@@ -23,12 +23,6 @@
         </div>
         <div class="col-md-5">
             <div class="row justify-content-end">
-                <div class="mr-3">
-                    <a href="#" class="btn btn-light bg-white btn-lg py-1 px-2" style="border-radius: 40%"><span class="text-success"><i class="fa fa-comments"></i></span></a>
-                </div>
-                <div class="mr-4">
-                    <a href="#" class="btn btn-light bg-white btn-lg py-1 px-2" style="border-radius: 40%"><span class="text-success"><i class="fa fa-bell"></i></span></a>
-                </div>
                 <div class="mr-4">
                     <img src="{{auth()->user()->profile_pic ?? asset('img/placeholders/profile.png')}}" class="img img-fluid border border-success" style="border-radius: 50%; width: 45px; height: 45px;"/>
                 </div>

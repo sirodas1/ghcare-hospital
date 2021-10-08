@@ -8,17 +8,9 @@
   
   <div class="row justify-content-end mt-5">
     <div class="col-md-3">
-      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;New Patient</a>
+      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;Search Patient</a>
     </div>
   </div>
-  @if (session()->has('search_message'))
-    <br>
-    <div class="row justify-content-center">
-      <div class="col-6 bg-danger px-4 py-2">
-        <span class="text-light">{{session()->get('success_message')}}</span>
-      </div>
-    </div><br><br>
-  @endif
   @if (session()->has('success_message'))
     <br>
     <div class="row justify-content-center">
