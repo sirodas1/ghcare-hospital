@@ -8,7 +8,7 @@
   
   <div class="row justify-content-end mt-5">
     <div class="col-md-3">
-      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;Search Patient</a>
+      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-search"></i>&emsp;Search Patient</a>
     </div>
   </div>
   @if (session()->has('success_message'))
