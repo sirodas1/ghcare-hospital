@@ -14,6 +14,19 @@ class LoginController extends Controller
 {
     public function login()
     {
+        if (Auth::guard('doctor')->check()) {
+            return redirect(RouteServiceProvider::DOCTOR);
+        }
+        if (Auth::guard('pharmacist')->check()) {
+            return redirect(RouteServiceProvider::PHARMACIST);
+        }
+        if (Auth::guard('nurse')->check()) {
+            return redirect(RouteServiceProvider::NURSE);
+        }
+        if (Auth::guard('web')->check()) {
+            return redirect(RouteServiceProvider::HOME);
+        }
+        
         return view('auth.login');
     }
 

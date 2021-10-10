@@ -8,17 +8,9 @@
   
   <div class="row justify-content-end mt-5">
     <div class="col-md-3">
-      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-plus"></i>&emsp;New Patient</a>
+      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDrugModal"><i class="fa fa-search"></i>&emsp;Search Patient</a>
     </div>
   </div>
-  @if (session()->has('search_message'))
-    <br>
-    <div class="row justify-content-center">
-      <div class="col-6 bg-danger px-4 py-2">
-        <span class="text-light">{{session()->get('success_message')}}</span>
-      </div>
-    </div><br><br>
-  @endif
   @if (session()->has('success_message'))
     <br>
     <div class="row justify-content-center">
@@ -84,7 +76,7 @@
                         <img src="/img/id-card@2x.png" class="img img-fluid form-icons" width="50px">
                       </div>
                       <div class="col-11 pt-1 px-0">
-                        <input id="national_card_id" type="text" class="form-control input-green" name="national_card_id" required placeholder="Enter Ghana National Card ID">
+                        <input id="national_card_id" type="text" class="form-control input-green" name="national_card_id" required placeholder="Enter Ghana National Card ID" onclick="addHash(this)" pattern="GHA-[0-9]{9}-[0-9]" title="must be in this format GHA-XXXXXXXXX-X" >
                       </div>
                     </div>
                   </div>

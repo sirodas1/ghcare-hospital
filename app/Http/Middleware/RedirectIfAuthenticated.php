@@ -17,14 +17,20 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, $guards = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+        if ($guard == "doctor" && Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::DOCTOR);
+        }
+        if ($guard == "pharmacist" && Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::PHARMACIST);
+        }
+        if ($guard == "nurse" && Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::NURSE);
+        }
+        if (Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::HOME);
         }
 
         return $next($request);
