@@ -115,7 +115,7 @@
                                 <label for="age" class="col col-form-label">{{ __('Age :') }}</label>
 
                                 <div class="col">
-                                    <input id="age" type="number" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ $nurse->age }}" required autocomplete="age" autofocus>
+                                    <input id="age" type="number" min="18" max="60" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ $nurse->age }}" required autocomplete="age" autofocus>
     
                                     @error('age')
                                         <span class="invalid-feedback" role="alert">

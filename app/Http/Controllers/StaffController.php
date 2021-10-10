@@ -21,7 +21,7 @@ class StaffController extends Controller
 
     public function viewDoctors()
     {
-        $doctors = Doctor::all();
+        $doctors = Doctor::where('hospital_id', auth()->user()->hospital_id)->get();
 
         $data = [
             'doctors' => $doctors,
@@ -159,7 +159,7 @@ class StaffController extends Controller
      */
     public function viewPharmacists()
     {
-        $pharmacists = Pharmacist::all();
+        $pharmacists = Pharmacist::where('hospital_id', auth()->user()->hospital_id)->get();
 
         $data = [
             'pharmacists' => $pharmacists,
@@ -297,7 +297,7 @@ class StaffController extends Controller
      */
     public function viewNurses()
     {
-        $nurses = Nurse::all();
+        $nurses = Nurse::where('hospital_id', auth()->user()->hospital_id)->get();
 
         $data = [
             'nurses' => $nurses,
