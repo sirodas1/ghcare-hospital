@@ -124,9 +124,11 @@
               <div class="row justify-content-center mt-4">
                 <span class="text-secondary h5">Patient Has No Folder In Hospital.</span>
               </div>
+              @auth('nurse')
               <div class="row justify-content-center mb-4">
                 <a href="{{route('nurse.patient.new-folder', ['id' => $patient->id])}}" class="text-success">Please click to create new folder</a>
               </div>
+              @endauth
           @endif
         </div>
       </div>
