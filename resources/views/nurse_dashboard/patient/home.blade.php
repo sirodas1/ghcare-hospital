@@ -12,15 +12,22 @@
         </div>
     </div><br><br>
 @endif
-
-<div class="row justify-content-between mx-0 my-3 mb-5">
-  <div class="col-md-3">
-    <a href="{{route('nurse.patient.folders', ['id' => $patient->id])}}" class="btn btn-success py-2"><i class="fa fa-folder-open"></i>&emsp; View Folders</a>
+@if(isset($folder))
+  <div class="row justify-content-between mx-0 my-3 mb-5">
+    <div class="col-md-3">
+      <a href="{{route('nurse.patient.folders', ['id' => $patient->id])}}" class="btn btn-success py-2"><i class="fa fa-folder-open"></i>&emsp; View Folders</a>
+    </div>
+    <div class="col-md-3">
+      <a href="#" class="btn btn-danger py-2" data-toggle="modal" data-target="#folderLockModal">@if(!$folder->locked)<i class="fa fa-lock"></i>&emsp; Lock @else <i class="fa fa-unlock"></i>&emsp; Unlock @endif Folder</a>
+    </div>
   </div>
-  <div class="col-md-3">
-    <a href="#" class="btn btn-danger py-2" data-toggle="modal" data-target="#folderLockModal">@if(!$folder->locked)<i class="fa fa-lock"></i>&emsp; Lock @else <i class="fa fa-unlock"></i>&emsp; Unlock @endif Folder</a>
+@else
+  <div class="row justify-content-start mx-0 my-3 mb-5">
+    <div class="col-md-3">
+      <a href="{{route('nurse.patient.folders', ['id' => $patient->id])}}" class="btn btn-success py-2"><i class="fa fa-folder-open"></i>&emsp; View Folders</a>
+    </div>
   </div>
-</div>
+@endif
 <div class="row">
   <div class="col-md-8 my-2">
       <div class="card p-0 w-100">
