@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('access', [PatientsController::class, 'accessPatient'])->name('access');
         Route::get('folders/{id}', [PatientsController::class, 'openFolders'])->name('folders');
         Route::get('folder/{id}', [PatientsController::class, 'openFolder'])->name('folder');
+        Route::post('folder/lock/{id}', [PatientsController::class, 'openLockedFolder'])->name('open-locked-folder');
     });
     //Settings
     Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {

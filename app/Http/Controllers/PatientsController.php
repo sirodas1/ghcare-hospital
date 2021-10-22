@@ -68,6 +68,27 @@ class PatientsController extends Controller
         return view('patient.folder', $data);
     }
 
+    public function openLockedFolder(Request $request, $id)
+    {
+        $this->validate($request, [
+            'pin' => 'required|string|size:4',
+        ]);
+
+        $folder = Folder::find($id);
+        if($folder->pin == $request->pin){
+            if(Auth::guard('doctor')->check()){
+                return redirect()->route('doctor.patient.folder', ['id' => $id]);
+            }else if(Auth::guard('nurse')->check()){
+                return redirect()->route('nurse.patient.folder', ['id' => $id]);
+            }else{
+                return redirect()->route('patient.folder', ['id' => $id]);
+            }
+        }
+        
+        session()->flash('error_message', 'Incorrect Locked Folder PIN.');
+        return back();
+    }
+
     public function nurseAccessPatient(Request $request)
     {
         $this->validate($request, [
@@ -306,6 +327,48 @@ class PatientsController extends Controller
             session()->flash('success_message', 'Prescription of Medication was Successful.');
             DB::commit();
         } catch (\Excepttion $exception) {
+            DB::rollback();
+            Log::error(['error' => $exception->getMessage()]);
+            session()->flash('error_message', 'Error Prescribing Medication.');
+        }
+
+        return back();
+    }
+
+    public function lockFolder(Request $request)
+    {
+        $this->validate($request,  [
+            'patient_id' => 'required|numeric',
+            'pin' => 'required|string|size:4',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $folder = Folder::where('hospital_id', auth()->user()->hospital_id)
+                            ->where('patient_id', $request->patient_id)->first();
+
+            if ($folder->locked) {
+                if ($folder->pin == $request->pin) {
+                    $folder->locked = false;
+                    $folder->pin = null;
+                    $folder->save();
+                    session()->flash('success_message', 'Folder Successfully Unlocked.');
+                }else{
+                    DB::rollback();
+                    session()->flash('error_message', 'Lock PIN Incorrect.');
+                    return back();
+                }
+            }else{
+                $folder->locked = true;
+                $folder->pin = $request->pin;
+                $folder->save();
+                session()->flash('success_message', 'Folder Successfully Locked.');
+            }
+
+            DB::commit();
+            
+        } catch (\Excepttion $excepttion) {
             DB::rollback();
             Log::error(['error' => $exception->getMessage()]);
             session()->flash('error_message', 'Error Prescribing Medication.');

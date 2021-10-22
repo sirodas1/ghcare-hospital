@@ -5,10 +5,20 @@
 @section('back-check', true)
 
 @section('content')
+@if (session()->has('error_message'))
+    <div class="row justify-content-center">
+        <div class="col-6 bg-danger px-4 py-2">
+            <span class="text-light">{{session()->get('error_message')}}</span>
+        </div>
+    </div><br><br>
+@endif
 
-<div class="row justify-content-start mx-0 my-3 mb-5">
-  <div class="col-md-3 3y-2">
+<div class="row justify-content-between mx-0 my-3 mb-5">
+  <div class="col-md-3">
     <a href="{{route('nurse.patient.folders', ['id' => $patient->id])}}" class="btn btn-success py-2"><i class="fa fa-folder-open"></i>&emsp; View Folders</a>
+  </div>
+  <div class="col-md-3">
+    <a href="#" class="btn btn-danger py-2" data-toggle="modal" data-target="#folderLockModal">@if(!$folder->locked)<i class="fa fa-lock"></i>&emsp; Lock @else <i class="fa fa-unlock"></i>&emsp; Unlock @endif Folder</a>
   </div>
 </div>
 <div class="row">
@@ -182,6 +192,43 @@
                 <div class="col-md-8">
                   <button type="submit" class="btn btn-success w-100" style="border-radius: 25px;">
                     {{ __('Add Allergy / Phobia') }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- Folder Lock Modal --}}
+<div class="modal fade" id="folderLockModal" tabindex="-1" role="dialog" aria-labelledby="folderLockModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="row justify-content-center mt-5">
+          <span class="form-header">Enter PIN to @if(!$folder->locked) Lock @else Unlock @endif Folder for This Hospital</span>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-9">
+            <form method="POST" action="{{ route('nurse.patient.lock-folder') }}">
+              @csrf
+              <input type="hidden" name="patient_id" value="{{$patient->id}}">
+              <div class="form-group row my-3">
+                <div class="col">
+                  <label for="type">PIN: </label>
+                  <input id="pin" type="text" class="form-control" name="pin" required placeholder="Eg. 1234" pattern="[0-9]{4}" title="Pin Must Be Numeric">
+                </div>
+              </div>
+              <div class="form-group my-4 row justify-content-center">
+                <div class="col-md-9">
+                  <button type="submit" class="btn btn-danger w-100" style="border-radius: 25px;">
+                    @if(!$folder->locked) Lock @else Unlock @endif Folder for this Hospital
                   </button>
                 </div>
               </div>

@@ -14,6 +14,8 @@ class Folder extends Model
     protected $fillable = [
         'hospital_id',
         'patient_id',
+        'locked',
+        'pin',
         'created_at',
         'updated_at',
     ];
