@@ -210,40 +210,43 @@
   </div>
 </div>
 
-{{-- Folder Lock Modal --}}
-<div class="modal fade" id="folderLockModal" tabindex="-1" role="dialog" aria-labelledby="folderLockModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="row justify-content-center mt-5">
-          <span class="form-header">Enter PIN to @if(!$folder->locked) Lock @else Unlock @endif Folder for This Hospital</span>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-9">
-            <form method="POST" action="{{ route('nurse.patient.lock-folder') }}">
-              @csrf
-              <input type="hidden" name="patient_id" value="{{$patient->id}}">
-              <div class="form-group row my-3">
-                <div class="col">
-                  <label for="type">PIN: </label>
-                  <input id="pin" type="text" class="form-control" name="pin" required placeholder="Eg. 1234" pattern="[0-9]{4}" title="Pin Must Be Numeric">
+@isset($folder)
+    {{-- Folder Lock Modal --}}
+  <div class="modal fade" id="folderLockModal" tabindex="-1" role="dialog" aria-labelledby="folderLockModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="row justify-content-center mt-5">
+            <span class="form-header">Enter PIN to @if(!$folder->locked) Lock @else Unlock @endif Folder for This Hospital</span>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-9">
+              <form method="POST" action="{{ route('nurse.patient.lock-folder') }}">
+                @csrf
+                <input type="hidden" name="patient_id" value="{{$patient->id}}">
+                <div class="form-group row my-3">
+                  <div class="col">
+                    <label for="type">PIN: </label>
+                    <input id="pin" type="text" class="form-control" name="pin" required placeholder="Eg. 1234" pattern="[0-9]{4}" title="Pin Must Be Numeric">
+                  </div>
                 </div>
-              </div>
-              <div class="form-group my-4 row justify-content-center">
-                <div class="col-md-9">
-                  <button type="submit" class="btn btn-danger w-100" style="border-radius: 25px;">
-                    @if(!$folder->locked) Lock @else Unlock @endif Folder for this Hospital
-                  </button>
+                <div class="form-group my-4 row justify-content-center">
+                  <div class="col-md-9">
+                    <button type="submit" class="btn btn-danger w-100" style="border-radius: 25px;">
+                      @if(!$folder->locked) Lock @else Unlock @endif Folder for this Hospital
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+@endisset
+
 @endsection
